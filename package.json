@@ -1,6 +1,6 @@
 {
   "name": "tauschen",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Extract translation strings from source files",
   "main": "src/lib.js",
   "bin": {
@@ -15,7 +15,8 @@
   "dependencies": {
     "chalk": "^2.4.1",
     "commander": "^2.19.0",
-    "glob": "^7.1.3"
+    "glob": "^7.1.3",
+    "shelljs": "^0.8.3"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

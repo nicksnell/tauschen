@@ -1,6 +1,7 @@
 const fs = require('fs')
 const glob = require('glob')
 const path = require('path')
+const shell = require('shelljs')
 const log = console.log
 
 const TEMPLATE_REGEX = `\\{\\{\\s?\\$t\\(('|")(.+?)('|")\\)\\s?\\}\\}`
@@ -49,7 +50,8 @@ function processFile(templatePath) {
  */
 function tauschen(src, ext = '*.vue') {
   if (src[0] !== '/') {
-    src = path.join(__dirname, src)
+    cwd = shell.pwd()
+    src = path.join(cwd.stdout, src)
   }
 
   if (!fs.existsSync(src)) {
