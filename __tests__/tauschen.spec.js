@@ -1,4 +1,4 @@
-import {getAllMatches} from '../src/lib'
+import { getAllMatches } from '../src/lib'
 
 describe('test all the matches are found', () => {
   it('match multiple matches', () => {

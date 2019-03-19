@@ -5,3 +5,14 @@
         <p>{{ $t('Footer') }}</p>
     </main>
 </template>
+
+<script>
+export default {
+  name: 'test',
+  methods: {
+    test() {
+      return this.$t('Another thing')
+    }
+  }
+}
+</script>

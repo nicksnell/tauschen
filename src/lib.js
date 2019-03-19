@@ -5,9 +5,56 @@ const shell = require('shelljs')
 const log = console.log
 
 const TEMPLATE_REGEX = `\\{\\{\\s?\\$t\\(('|")(.+?)('|")\\)\\s?\\}\\}`
+const JS_REGEX = `this\.\\$t\\(('|")(.+?)('|")\\)`
 
-function getRegExp() {
+function getTemplateRegExp() {
   return new RegExp(TEMPLATE_REGEX, 'mg')
+}
+
+function getJsRegExp() {
+  return new RegExp(JS_REGEX, 'mg')
+}
+
+/**
+ *
+ */
+function getTemplateMatches(input) {
+  let match
+  const results = []
+  const regex = getTemplateRegExp()
+
+  while ((match = regex.exec(input)) !== null) {
+    if (match.index === regex.lastIndex) {
+      regex.lastIndex++
+    }
+
+    if (match) {
+      results.push(match[2])
+    }
+  }
+
+  return results
+}
+
+/**
+ *
+ */
+function getJsMatches(input) {
+  let match
+  const results = []
+  const regex = getJsRegExp()
+
+  while ((match = regex.exec(input)) !== null) {
+    if (match.index === regex.lastIndex) {
+      regex.lastIndex++
+    }
+
+    if (match) {
+      results.push(match[2])
+    }
+  }
+
+  return results
 }
 
 /**
@@ -15,21 +62,11 @@ function getRegExp() {
  * @param string input
  */
 function getAllMatches(input) {
-  let match
-  const results = []
-  const regex = getRegExp()
-
-  while ((match = regex.exec(input)) !== null) {
-    if (match.index === regex.lastIndex) {
-        regex.lastIndex++
-    }
-
-    if (match) {
-        results.push(match[2])
-    }
-  }
-
-  return results
+  let results = [
+    getTemplateMatches(input),
+    getJsMatches(input),
+  ]
+  return [].concat(...results)
 }
 
 
@@ -76,7 +113,8 @@ function tauschen(src, ext = '*.vue') {
 
 module.exports = {
   TEMPLATE_REGEX,
-  getRegExp,
+  getTemplateRegExp,
+  getJsRegExp,
   getAllMatches,
   processFile,
   tauschen,
