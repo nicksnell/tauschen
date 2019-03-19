@@ -1,6 +1,6 @@
 {
   "name": "tauschen",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Extract translation strings from source files",
   "main": "src/lib.js",
   "bin": {
